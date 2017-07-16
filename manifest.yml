@@ -1,14 +1,11 @@
----
-declared-services:
-  sample-java-cloudant-cloudantNoSQLDB:
-    label: cloudantNoSQLDB
-    plan: Lite
 applications:
-- name: springboot-demo
+- name: springboot-inquiry-manager
   instances: 1
   path: ./target/springboot-inquiry-manager.war
   buildpack: liberty-for-java
-  command: mvn spring-boot:run
   memory: 512M
   domain: mybluemix.net
   disk_quota: 256M
+  services:
+  - Compose for MySQL-uf
+  - Conversation-Identification
