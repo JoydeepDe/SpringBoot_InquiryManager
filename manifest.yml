@@ -9,3 +9,4 @@ applications:
   services:
   - Compose for MySQL-uf
   - Conversation-Identification
+  - Language Translator-mf

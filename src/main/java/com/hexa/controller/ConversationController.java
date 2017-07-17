@@ -5,8 +5,10 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,11 +18,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hexa.model.Conversation;
 import com.hexa.services.ConversationServices;
+import com.hexa.services.TranslatorServices;
 import com.ibm.watson.developer_cloud.conversation.v1.model.MessageResponse;
+import com.ibm.watson.developer_cloud.language_translator.v2.model.Language;
 
 @Controller
+@Scope("session")
 public class ConversationController {
-
+	
 	/*
 	 * @Autowired Database account;
 	 */
@@ -28,17 +33,26 @@ public class ConversationController {
 	@Autowired
 	private ConversationServices conversationServices;
 
+	@Autowired
+	private TranslatorServices translatorServices;
+
 	public static final String ACCOUNTNO = "AccountNo";
 	public static final String SSN = "SSN";
 	public static final String ZIPCODE = "ZipCode";
 
 	@RequestMapping(path = "/conversation", method = RequestMethod.POST)
-	public String createAccount(Model model,
+	public String createLogin(HttpSession session, Model model,
 			@RequestParam(value = "username", required = false, defaultValue = "everyone") String username,
-			@RequestParam(value = "password", required = false, defaultValue = "everyone") String password) {
+			@RequestParam(value = "password", required = false, defaultValue = "everyone") String password,
+			@RequestParam(value = "language", required = false, defaultValue = "everyone") String language) {
 
 		model.addAttribute("username", username);
 		model.addAttribute("password", password);
+		model.addAttribute("language", language);
+
+		session.setAttribute("context", null);
+		session.setAttribute("language", language);
+
 		return "conversation";
 	}
 
@@ -49,6 +63,9 @@ public class ConversationController {
 
 		@SuppressWarnings("unchecked")
 		Map<String, Object> context = (Map<String, Object>) request.getSession().getAttribute("context");
+
+		// Language
+		String language = (String) request.getSession().getAttribute("language");
 
 		Conversation conversation = new Conversation();
 		String message = request.getParameter("message");
@@ -61,12 +78,9 @@ public class ConversationController {
 		List<String> responseText = (List<String>) output.get("text");
 		StringBuffer msg = new StringBuffer();
 		if (responseText.size() > 0) {
-			// System.out.println("Watson:- " + responseText.get(0));
 			msg.append(responseText.get(0));
-			// employee.setMessage(responseText.get(0));
-			// employee.setContext(context);
-			System.out.println("Inside add Method : " + responseText.get(0));
 		}
+
 		if (output.get("action") != null) {
 			String actionString = (String) output.get("action");
 			if ("verifyAccountNo".equalsIgnoreCase(actionString)) {
@@ -98,7 +112,15 @@ public class ConversationController {
 
 		}
 
-		conversation.setMessage(msg.toString());
+		String translatedText = "";
+		if (Language.valueOf(language) == Language.ENGLISH) {
+			translatedText = msg.toString();
+		} else {
+			translatedText = translatorServices.getTranslatedText(msg.toString(), Language.ENGLISH,
+					Language.valueOf(language));
+		}
+
+		conversation.setMessage(translatedText);
 		conversation.setContext(context);
 
 		request.getSession().setAttribute("context", context);

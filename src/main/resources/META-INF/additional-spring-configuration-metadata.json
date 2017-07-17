@@ -1,0 +1,17 @@
+{"properties": [
+  {
+    "name": "language.translator.username",
+    "type": "java.lang.String",
+    "description": "A description for 'language.translator.username'"
+  },
+  {
+    "name": "language.translator.password",
+    "type": "java.lang.String",
+    "description": "A description for 'language.translator.password'"
+  },
+  {
+    "name": "language.to",
+    "type": "java.lang.String",
+    "description": "A description for 'language.to'"
+  }
+]}

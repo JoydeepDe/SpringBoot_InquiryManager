@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Home</title>
+<title>Fintech - Inquiry Manager</title>
 </head>
 <body>
 	<form method="post" action="/conversation">
@@ -22,15 +22,26 @@
 					value="test"></td>
 			</tr>
 			<tr>
+				<td><label for="name">Language:</label></td>
+				<td>
+					<select name="language">
+						<option value="ENGLISH">ENGLISH</option>
+					    <option value="SPANISH">SPANISH</option>
+					    <option value="FRENCH">FRENCH</option>
+					    <option value="GERMAN">GERMAN</option>
+		  			</select>
+				</td>
+			</tr>
+			<tr>
 				<td colspan=2><input type="submit" value="Login"></td>
 			</tr>
 		</table>
 	</form>
 	<br>
 	<br>
-	<div align="center">
-	        <h1>Contact List</h1>
-        	<table border="1">
+	<div>
+	        <h1>User List</h1>
+        	<table border="1" cellpadding="1" CellSpacing="1">
 	        	<th>ID</th>
 	        	<th>USERNAME</th>
 	        	<th>PASSWORD</th>

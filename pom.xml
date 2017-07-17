@@ -25,9 +25,9 @@
 		<dependency>
 			<groupId>jstl</groupId>
 			<artifactId>jstl</artifactId>
-			<version>1.2</version>		
+			<version>1.2</version>
 		</dependency>
-	
+
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -49,12 +49,19 @@
 			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- IBM Bluemix Services -->
 		<dependency>
 			<groupId>com.ibm.watson.developer_cloud</groupId>
 			<artifactId>conversation</artifactId>
 			<version>3.8.0</version>
 		</dependency>
-		
+		<dependency>
+			<groupId>com.ibm.watson.developer_cloud</groupId>
+			<artifactId>language-translator</artifactId>
+			<version>3.8.0</version>
+		</dependency>
+
 		<!-- Hibernate -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
