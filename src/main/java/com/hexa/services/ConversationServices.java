@@ -11,7 +11,7 @@ import com.ibm.watson.developer_cloud.conversation.v1.model.MessageResponse;
 @Service
 public class ConversationServices {
 
-	public static String WORKSPACE_ID = "14daedf5-3aa1-4538-9994-bc6e6012902d";
+	public static String WORKSPACE_ID = "234cf322-ab06-44de-a5cb-f282f0995435";
 
 	public MessageResponse getConversationResponseService(String message,Map<String, Object> context) {
 		
@@ -22,7 +22,7 @@ public class ConversationServices {
 	
 	public static ConversationService getService(){
 		ConversationService service = new ConversationService(ConversationService.VERSION_DATE_2016_09_20);
-		service.setUsernameAndPassword("b21e137d-b1b8-49a6-8096-0df0c76b4496", "acmdBRDLf7jn");
+		service.setUsernameAndPassword("ab9c9d04-2090-44ea-9947-dcbcaa4c2dd4", "fxHx6E64Efor");
 		return service;
 	}
 

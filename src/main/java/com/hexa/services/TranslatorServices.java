@@ -18,7 +18,7 @@ public class TranslatorServices {
 
 	public static LanguageTranslator getService() {
 		LanguageTranslator service = new LanguageTranslator();
-		service.setUsernameAndPassword("a29ff63a-2f8d-4f63-9520-ee5a5e06f4e3", "IWmlqqi7rsUv");
+		service.setUsernameAndPassword("d11097bd-e529-4b77-8ea5-63cdf7ab24d0", "3tMigyrr7cP2");
 		return service;
 	}
 

@@ -8,7 +8,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<context:component-scan base-package="com.hexa" />
-	<mvc:annotation-driven /> 
+	<mvc:annotation-driven />
 
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
@@ -34,8 +34,20 @@
 			<ref bean="sessionFactory" />
 		</constructor-arg>
 	</bean>
+
+	<bean id="accountDAOImpl" class="com.hexa.model.dao.impl.AccountDAOImpl">
+		<constructor-arg>
+			<ref bean="sessionFactory" />
+		</constructor-arg>
+	</bean>
 	
-	
-	
-	
+	<bean id="transactionDao" class="com.hexa.model.dao.impl.TransactionDAOImpl">
+		<constructor-arg>
+			<ref bean="sessionFactory" />
+		</constructor-arg>
+	</bean>
+
+
+
+
 </beans>
